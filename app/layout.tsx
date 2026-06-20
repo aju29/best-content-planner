@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import Link from "next/link";
 import "./globals.css";
+import NavLinks from "@/components/NavLinks";
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
@@ -27,15 +27,7 @@ export default function RootLayout({
             <span className="text-gray-900 font-bold tracking-tight">
               Content Planner
             </span>
-            <Link href="/" className="text-gray-500 hover:text-gray-900 transition-colors font-medium">
-              Dashboard
-            </Link>
-            <Link href="/tasks" className="text-gray-500 hover:text-gray-900 transition-colors font-medium">
-              Tasks
-            </Link>
-            <Link href="/resources" className="text-gray-500 hover:text-gray-900 transition-colors font-medium">
-              Resources
-            </Link>
+            <NavLinks />
           </div>
         </nav>
         {children}
