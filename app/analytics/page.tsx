@@ -1,5 +1,5 @@
 import { getAnalyticsPendingTasks, getProjects } from '@/lib/supabase'
-import UploadButton from './UploadButton'
+import AnalyticsUploadButton from '@/components/AnalyticsUploadButton'
 
 export const dynamic = 'force-dynamic'
 
@@ -71,7 +71,7 @@ export default async function AnalyticsPage() {
                         ) : '—'}
                       </td>
                       <td className="px-5 py-4">
-                        <UploadButton taskId={task.id} />
+                        <AnalyticsUploadButton taskId={task.id} />
                       </td>
                     </tr>
                   )

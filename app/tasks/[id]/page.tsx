@@ -5,6 +5,7 @@ import { updateCompletionAction } from './actions'
 import StatusUpdater from './StatusUpdater'
 import CommentSection from './CommentSection'
 import DeleteButton from './DeleteButton'
+import AnalyticsUploadButton from '@/components/AnalyticsUploadButton'
 import type { TaskStatus } from '@/lib/types'
 
 const STATUS_STYLES: Record<TaskStatus, string> = {
@@ -177,6 +178,11 @@ export default async function TaskDetailPage({
               Completed {new Date(task.completed_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
             </p>
           )}
+
+          <div>
+            <h2 className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Analytics Screenshot</h2>
+            <AnalyticsUploadButton taskId={task.id} currentUrl={task.analytics_screenshot} />
+          </div>
         </div>
 
         {/* Comments */}
