@@ -1,11 +1,10 @@
 import Link from 'next/link'
-import { supabase } from '@/lib/supabase'
+import { getProjects, getTasks } from '@/lib/supabase'
 
 export const dynamic = 'force-dynamic'
 
 export default async function Dashboard() {
-  const { data: projects } = await supabase.from('projects').select('*')
-  const { data: tasks } = await supabase.from('tasks').select('*')
+  const [projects, tasks] = await Promise.all([getProjects(), getTasks()])
 
   return (
     <main className="text-gray-900 p-8">
@@ -19,8 +18,8 @@ export default async function Dashboard() {
 
         {/* Project Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {projects?.map((project) => {
-            const projectTasks = tasks?.filter(t => t.project_id === project.id) || []
+          {projects.map((project) => {
+            const projectTasks = tasks.filter(t => t.project_id === project.id)
             const pending = projectTasks.filter(t => t.status === 'pending').length
             const inProgress = projectTasks.filter(t => t.status === 'in_progress').length
             const review = projectTasks.filter(t => t.status === 'review').length
