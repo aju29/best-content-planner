@@ -23,6 +23,7 @@ export type Task = {
   published_url: string | null
   completion_notes: string | null
   completed_at: string | null
+  analytics_screenshot: string | null
   created_at: string
   updated_at: string
 }

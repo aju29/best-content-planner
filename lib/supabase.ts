@@ -35,6 +35,19 @@ export async function getTasks({
   return data ?? []
 }
 
+export async function getAnalyticsPendingTasks(): Promise<Task[]> {
+  const fiveDaysAgo = new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString()
+  const { data, error } = await supabase
+    .from('tasks')
+    .select('*')
+    .eq('status', 'done')
+    .lt('completed_at', fiveDaysAgo)
+    .is('analytics_screenshot', null)
+    .order('completed_at', { ascending: false })
+  if (error) throw error
+  return data ?? []
+}
+
 export async function getPublishedTasks(): Promise<Task[]> {
   const { data, error } = await supabase
     .from('tasks')
