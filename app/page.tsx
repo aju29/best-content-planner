@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 
+export const dynamic = 'force-dynamic'
+
 export default async function Dashboard() {
   const { data: projects } = await supabase.from('projects').select('*')
   const { data: tasks } = await supabase.from('tasks').select('*')

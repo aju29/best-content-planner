@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { Suspense } from 'react'
 import { getProjects, getTasks } from '@/lib/supabase'
+
+export const dynamic = 'force-dynamic'
 import type { Task, Project, TaskStatus } from '@/lib/types'
 import TaskFilters from './TaskFilters'
 
