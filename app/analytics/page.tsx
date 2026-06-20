@@ -1,5 +1,6 @@
 import { getAnalyticsPendingTasks, getProjects } from '@/lib/supabase'
 import AnalyticsUploadButton from '@/components/AnalyticsUploadButton'
+import NotesField from './NotesField'
 
 export const dynamic = 'force-dynamic'
 
@@ -12,7 +13,7 @@ export default async function AnalyticsPage() {
 
   return (
     <main className="text-gray-900 p-8">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
 
         {/* Header */}
         <div className="mb-8">
@@ -30,15 +31,15 @@ export default async function AnalyticsPage() {
             <p className="text-green-600 text-sm mt-1">No screenshots pending.</p>
           </div>
         ) : (
-          <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+          <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-gray-100 bg-gray-50 text-left">
                   <th className="px-5 py-3 font-semibold text-gray-600">Title</th>
                   <th className="px-5 py-3 font-semibold text-gray-600">Project</th>
-                  <th className="px-5 py-3 font-semibold text-gray-600">Channel</th>
                   <th className="px-5 py-3 font-semibold text-gray-600">Completed</th>
                   <th className="px-5 py-3 font-semibold text-gray-600">Screenshot</th>
+                  <th className="px-5 py-3 font-semibold text-gray-600">Video Context & Notes</th>
                 </tr>
               </thead>
               <tbody>
@@ -49,19 +50,18 @@ export default async function AnalyticsPage() {
                     : null
 
                   return (
-                    <tr key={task.id} className="border-b border-gray-100 last:border-0 hover:bg-gray-50 transition-colors">
-                      <td className="px-5 py-4 font-medium text-gray-900 max-w-xs">
+                    <tr key={task.id} className="border-b border-gray-100 last:border-0 align-top">
+                      <td className="px-5 py-4 font-medium text-gray-900 max-w-[200px]">
                         {task.title}
                       </td>
                       <td className="px-5 py-4">
                         {project ? (
                           <span className="flex items-center gap-1.5">
                             <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: project.color }} />
-                            <span className="text-gray-600">{project.name}</span>
+                            <span className="text-gray-600 whitespace-nowrap">{project.name}</span>
                           </span>
                         ) : '—'}
                       </td>
-                      <td className="px-5 py-4 text-gray-600">{task.channel ?? '—'}</td>
                       <td className="px-5 py-4 text-gray-500 whitespace-nowrap">
                         {task.completed_at ? (
                           <span>
@@ -72,6 +72,9 @@ export default async function AnalyticsPage() {
                       </td>
                       <td className="px-5 py-4">
                         <AnalyticsUploadButton taskId={task.id} />
+                      </td>
+                      <td className="px-5 py-4">
+                        <NotesField taskId={task.id} initialValue={task.analytics_notes} />
                       </td>
                     </tr>
                   )
