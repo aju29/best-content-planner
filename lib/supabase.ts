@@ -35,6 +35,16 @@ export async function getTasks({
   return data ?? []
 }
 
+export async function getPublishedTasks(): Promise<Task[]> {
+  const { data, error } = await supabase
+    .from('tasks')
+    .select('*')
+    .not('published_url', 'is', null)
+    .order('completed_at', { ascending: false })
+  if (error) throw error
+  return data ?? []
+}
+
 export async function getTaskById(id: string): Promise<Task | null> {
   const { data, error } = await supabase
     .from('tasks')
