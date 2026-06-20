@@ -22,7 +22,7 @@ export default function NotesField({
 
     const { error: err } = await supabase
       .from('tasks')
-      .update({ analytics_notes: value.trim() || null })
+      .update({ completion_notes: value.trim() || null })
       .eq('id', taskId)
 
     if (err) {

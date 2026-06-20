@@ -24,7 +24,6 @@ export type Task = {
   completion_notes: string | null
   completed_at: string | null
   analytics_screenshot: string | null
-  analytics_notes: string | null
   analytics_report: string | null
   created_at: string
   updated_at: string

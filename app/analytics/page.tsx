@@ -74,7 +74,7 @@ export default async function AnalyticsPage() {
                         <AnalyticsUploadButton taskId={task.id} />
                       </td>
                       <td className="px-5 py-4">
-                        <NotesField taskId={task.id} initialValue={task.analytics_notes} />
+                        <NotesField taskId={task.id} initialValue={task.completion_notes} />
                       </td>
                     </tr>
                   )
