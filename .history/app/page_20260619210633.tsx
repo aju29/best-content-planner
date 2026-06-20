@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 
 export default async function Dashboard() {
@@ -6,28 +5,27 @@ export default async function Dashboard() {
   const { data: tasks } = await supabase.from('tasks').select('*')
 
   return (
-    <main className="text-gray-900 p-8">
+    <main className="min-h-screen bg-gray-950 text-white p-8">
       <div className="max-w-6xl mx-auto">
-
+        
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold">Content Planner</h1>
-          <p className="text-gray-500 mt-1">All projects at a glance</p>
+          <p className="text-gray-400 mt-1">All projects at a glance</p>
         </div>
 
         {/* Project Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {projects?.map((project) => {
             const projectTasks = tasks?.filter(t => t.project_id === project.id) || []
+            const done = projectTasks.filter(t => t.status === 'done').length
             const pending = projectTasks.filter(t => t.status === 'pending').length
             const inProgress = projectTasks.filter(t => t.status === 'in_progress').length
-            const review = projectTasks.filter(t => t.status === 'review').length
-            const done = projectTasks.filter(t => t.status === 'done').length
 
             return (
               <div
                 key={project.id}
-                className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm"
+                className="rounded-xl border border-gray-800 bg-gray-900 p-5"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div
@@ -36,11 +34,10 @@ export default async function Dashboard() {
                   />
                   <h2 className="font-semibold text-lg">{project.name}</h2>
                 </div>
-                <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm">
-                  <Link href={`/tasks?project=${project.id}&status=pending`} className="text-red-500 font-semibold hover:underline">⏳ {pending} pending</Link>
-                  <Link href={`/tasks?project=${project.id}&status=in_progress`} className="text-gray-500 hover:text-gray-800 hover:underline">🔄 {inProgress} in progress</Link>
-                  <Link href={`/tasks?project=${project.id}&status=review`} className="text-gray-500 hover:text-gray-800 hover:underline">👀 {review} review</Link>
-                  <Link href={`/tasks?project=${project.id}&status=done`} className="text-gray-500 hover:text-gray-800 hover:underline">✅ {done} done</Link>
+                <div className="flex gap-4 text-sm text-gray-400">
+                  <span>⏳ {pending} pending</span>
+                  <span>🔄 {inProgress} in progress</span>
+                  <span>✅ {done} done</span>
                 </div>
               </div>
             )
