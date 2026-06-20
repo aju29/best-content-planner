@@ -11,9 +11,17 @@ export default async function Dashboard() {
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold">Content Planner</h1>
-          <p className="text-gray-500 mt-1">All projects at a glance</p>
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <h1 className="text-3xl font-bold">Content Planner</h1>
+            <p className="text-gray-500 mt-1">All projects at a glance</p>
+          </div>
+          <Link
+            href="/tasks/new"
+            className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold rounded-lg transition-colors"
+          >
+            + New Task
+          </Link>
         </div>
 
         {/* Project Cards */}
