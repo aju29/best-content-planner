@@ -33,6 +33,9 @@ export default function RootLayout({
             <Link href="/tasks" className="text-gray-500 hover:text-gray-900 transition-colors font-medium">
               Tasks
             </Link>
+            <Link href="/resources" className="text-gray-500 hover:text-gray-900 transition-colors font-medium">
+              Resources
+            </Link>
           </div>
         </nav>
         {children}
